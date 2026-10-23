@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ContactActions } from "@/components/contact-actions";
 import { InstagramGrid } from "@/components/instagram-grid";
 import { JsonLd } from "@/components/json-ld";
-import { site } from "@/content/site";
+import { assetPath, site } from "@/content/site";
 import { services } from "@/content/services";
 import { practiceJsonLd } from "@/lib/structured-data";
 
@@ -53,7 +53,7 @@ export default function Home() {
             />
             <div className="relative aspect-[3/4] overflow-hidden">
               <Image
-                src="/images/forest-meditation.jpg"
+                src={assetPath("/images/forest-meditation.jpg")}
                 alt="Mulher em meditação sobre uma rocha, num pinhal com luz filtrada"
                 fill
                 priority
@@ -82,7 +82,7 @@ export default function Home() {
           <div className="md:col-span-5">
             <div className="relative aspect-[3/4] overflow-hidden">
               <Image
-                src="/images/morning-light.jpg"
+                src={assetPath("/images/morning-light.jpg")}
                 alt="Mulher em perfil, de manhã, junto a uma janela"
                 fill
                 sizes="(min-width: 768px) 36vw, 100vw"
@@ -118,7 +118,7 @@ export default function Home() {
         <div className="mx-auto grid max-w-6xl gap-3 px-5 pb-16 md:grid-cols-2 md:pb-24 lg:px-8">
           <figure className="relative aspect-[4/3] overflow-hidden">
             <Image
-              src="/images/beach-sit.jpg"
+              src={assetPath("/images/beach-sit.jpg")}
               alt="Mulher sentada na areia, de frente para o mar"
               fill
               sizes="(min-width: 768px) 48vw, 100vw"
@@ -127,7 +127,7 @@ export default function Home() {
           </figure>
           <figure className="relative aspect-[4/3] overflow-hidden">
             <Image
-              src="/images/yoga-hill.jpg"
+              src={assetPath("/images/yoga-hill.jpg")}
               alt="Mulher em posição de yoga num monte, com um vale e um rio ao fundo"
               fill
               sizes="(min-width: 768px) 48vw, 100vw"

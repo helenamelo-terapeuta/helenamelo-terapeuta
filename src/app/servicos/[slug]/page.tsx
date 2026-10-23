@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { ContactActions } from "@/components/contact-actions";
 import { FaqList } from "@/components/faq-list";
 import { JsonLd } from "@/components/json-ld";
+import { assetPath } from "@/content/site";
 import { getService, services } from "@/content/services";
 import { serviceJsonLd } from "@/lib/structured-data";
 
@@ -74,7 +75,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
         </div>
         <div className="relative aspect-square overflow-hidden md:col-span-5">
           <Image
-            src={service.image.src}
+            src={assetPath(service.image.src)}
             alt={service.image.alt}
             fill
             priority

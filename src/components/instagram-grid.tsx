@@ -1,7 +1,7 @@
 import Image from "next/image";
 import type { FeedLine, FeedPost } from "@/content/instagram";
 import { feedPosts } from "@/content/instagram";
-import { site } from "@/content/site";
+import { assetPath, site } from "@/content/site";
 
 const themes: Record<FeedPost["theme"], string> = {
   paper: "bg-[#f7f4ee] text-ink",
@@ -41,7 +41,7 @@ function FeedCard({ post }: { post: FeedPost }) {
       >
         {post.image ? (
           <Image
-            src={post.image}
+            src={assetPath(post.image)}
             alt=""
             fill
             sizes="(min-width: 1024px) 22vw, 50vw"

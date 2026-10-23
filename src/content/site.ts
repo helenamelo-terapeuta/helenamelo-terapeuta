@@ -19,6 +19,14 @@ export const site = {
   instagramMessages: "https://ig.me/m/helenamelo.pt",
 } as const;
 
+export function assetPath(path: string) {
+  if (!path.startsWith("/")) {
+    return path;
+  }
+
+  return `${site.basePath}${path}`;
+}
+
 export function pageUrl(path: string) {
   if (path === "/") {
     return `${site.url}${site.basePath}/`;

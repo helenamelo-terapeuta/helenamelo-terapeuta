@@ -3,11 +3,13 @@ import { site } from "@/content/site";
 type ContactActionsProps = {
   className?: string;
   tone?: "light" | "dark";
+  messageLabel?: string;
 };
 
 export function ContactActions({
   className = "",
   tone = "light",
+  messageLabel = "Falar no Instagram",
 }: ContactActionsProps) {
   const primary =
     tone === "dark"
@@ -26,7 +28,7 @@ export function ContactActions({
         target="_blank"
         rel="noopener noreferrer"
       >
-        Falar no Instagram
+        {messageLabel}
         <span className="sr-only">, abre as mensagens do Instagram</span>
       </a>
       <a

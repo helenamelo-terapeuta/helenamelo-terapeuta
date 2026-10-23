@@ -1,5 +1,5 @@
 import { pageUrl, site } from "@/content/site";
-import type { Service } from "@/content/services";
+import { services, type Service } from "@/content/services";
 
 export function practiceJsonLd() {
   return {
@@ -10,14 +10,14 @@ export function practiceJsonLd() {
     url: pageUrl("/"),
     telephone: "+351910298644",
     email: site.email,
-    image: pageUrl("/images/forest-meditation.jpg"),
+    image: pageUrl("/images/feira-alternativa-bem-estar-2024.jpeg"),
     areaServed: {
       "@type": "Country",
       name: "Portugal",
     },
     availableLanguage: ["pt-PT"],
     sameAs: [site.instagramUrl],
-    knowsAbout: ["Hipnoterapia", "Astrologia", "Tarot"],
+    knowsAbout: services.map((service) => service.shortTitle),
   };
 }
 

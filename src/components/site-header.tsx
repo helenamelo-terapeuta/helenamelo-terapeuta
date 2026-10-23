@@ -18,7 +18,7 @@ export function SiteHeader() {
             Terapeuta holística
           </span>
         </Link>
-        <nav className="hidden items-center gap-7 md:flex" aria-label="Secções">
+        <nav className="hidden items-center gap-5 lg:flex" aria-label="Secções">
           {nav.map((item) => (
             <Link
               key={item.href}
@@ -29,7 +29,7 @@ export function SiteHeader() {
             </Link>
           ))}
         </nav>
-        <div className="hidden items-center gap-4 md:flex">
+        <div className="hidden items-center gap-4 lg:flex">
           <a href={site.phoneHref} className="text-sm text-ink">
             {site.phoneDisplay}
           </a>
@@ -45,7 +45,7 @@ export function SiteHeader() {
         </div>
         <button
           type="button"
-          className="min-h-11 rounded-full border border-line px-4 text-sm md:hidden"
+          className="min-h-11 rounded-full border border-line px-4 text-sm lg:hidden"
           aria-expanded={open}
           aria-controls="menu-mobile"
           onClick={() => setOpen((current) => !current)}
@@ -57,7 +57,7 @@ export function SiteHeader() {
         <nav
           id="menu-mobile"
           aria-label="Secções"
-          className="border-t border-line px-5 py-2 md:hidden"
+          className="border-t border-line px-5 py-2 lg:hidden"
         >
           {nav.map((item) => (
             <Link

@@ -6,7 +6,7 @@ import { ContactActions } from "@/components/contact-actions";
 import { FaqList } from "@/components/faq-list";
 import { JsonLd } from "@/components/json-ld";
 import { assetPath } from "@/content/site";
-import { getService, services } from "@/content/services";
+import { categories, getService, services, servicesIn } from "@/content/services";
 import { serviceJsonLd } from "@/lib/structured-data";
 
 type ServicePageProps = {
@@ -47,7 +47,10 @@ export default async function ServicePage({ params }: ServicePageProps) {
     notFound();
   }
 
-  const others = services.filter((item) => item.slug !== service.slug);
+  const others = servicesIn(service.category).filter(
+    (item) => item.slug !== service.slug,
+  );
+  const category = categories.find((item) => item.id === service.category);
 
   return (
     <article>
@@ -65,11 +68,16 @@ export default async function ServicePage({ params }: ServicePageProps) {
             <span aria-hidden="true"> / </span>
             <span className="text-ink">{service.title}</span>
           </p>
-          <h1 className="mt-4 font-serif text-5xl leading-[0.95] text-balance text-ink md:text-7xl">
+          {category ? (
+            <p className="mt-4 text-xs tracking-[0.18em] text-teal uppercase">
+              {category.title}
+            </p>
+          ) : null}
+          <h1 className="mt-3 font-serif text-5xl leading-[0.95] text-balance text-ink md:text-6xl">
             {service.title}
           </h1>
-          <p className="mt-5 max-w-xl text-lg leading-relaxed text-pretty text-muted">
-            {service.summary}
+          <p className="mt-5 max-w-xl font-serif text-2xl leading-snug text-pretty text-teal italic">
+            {service.lead}
           </p>
           <ContactActions className="mt-8" />
         </div>
@@ -103,6 +111,43 @@ export default async function ServicePage({ params }: ServicePageProps) {
         </aside>
       </div>
 
+      {service.gallery?.length ? (
+        <div className="mx-auto grid max-w-6xl gap-3 px-5 pb-16 md:grid-cols-2 md:pb-20 lg:px-8">
+          {service.gallery.map((image) => (
+            <figure key={image.src} className="relative aspect-[4/3] overflow-hidden">
+              <Image
+                src={assetPath(image.src)}
+                alt={image.alt}
+                fill
+                sizes="(min-width: 768px) 48vw, 100vw"
+                className="object-cover"
+              />
+            </figure>
+          ))}
+        </div>
+      ) : null}
+
+      {service.offerings?.length ? (
+        <section className="mx-auto max-w-6xl px-5 pb-16 md:pb-24 lg:px-8">
+          <h2 className="font-serif text-4xl text-ink md:text-5xl">
+            Modalidades
+          </h2>
+          <ul className="mt-8 grid gap-6 md:grid-cols-2">
+            {service.offerings.map((offering) => (
+              <li key={offering.name} className="border border-line p-6">
+                <p className="font-serif text-5xl text-teal">{offering.price}</p>
+                <h3 className="mt-3 font-serif text-3xl text-ink">
+                  {offering.name}
+                </h3>
+                <p className="mt-3 leading-relaxed text-pretty text-muted">
+                  {offering.description}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
+
       <section className="mx-auto max-w-6xl px-5 pb-16 md:pb-24 lg:px-8">
         <h2 className="font-serif text-4xl text-ink md:text-5xl">
           Perguntas frequentes
@@ -114,7 +159,9 @@ export default async function ServicePage({ params }: ServicePageProps) {
 
       <section className="border-t border-line">
         <div className="mx-auto max-w-6xl px-5 py-14 lg:px-8">
-          <h2 className="font-serif text-3xl text-ink">Outros caminhos</h2>
+          <h2 className="font-serif text-3xl text-ink">
+            {category ? category.title : "Outros caminhos"}
+          </h2>
           <ul className="mt-6 grid gap-4 md:grid-cols-2">
             {others.map((item) => (
               <li key={item.slug}>
@@ -122,8 +169,10 @@ export default async function ServicePage({ params }: ServicePageProps) {
                   href={`/servicos/${item.slug}`}
                   className="block border border-line p-5 transition hover:border-teal"
                 >
-                  <span className="font-serif text-2xl text-ink">{item.title}</span>
-                  <span className="mt-2 block text-sm text-teal">Ver página</span>
+                  <span className="font-serif text-2xl text-ink">
+                    {item.shortTitle}
+                  </span>
+                  <span className="mt-2 block text-sm text-muted">{item.lead}</span>
                 </Link>
               </li>
             ))}

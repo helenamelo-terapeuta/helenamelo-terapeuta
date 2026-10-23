@@ -19,14 +19,14 @@ export function SiteFooter() {
         </div>
         <div>
           <p className="text-xs tracking-[0.2em] text-teal uppercase">Serviços</p>
-          <ul className="mt-4 space-y-2">
+          <ul className="mt-4 columns-2 gap-x-6 space-y-2">
             {services.map((service) => (
               <li key={service.slug}>
                 <Link
                   href={`/servicos/${service.slug}`}
                   className="text-sm text-ink hover:text-teal"
                 >
-                  {service.title}
+                  {service.shortTitle}
                 </Link>
               </li>
             ))}
@@ -73,8 +73,7 @@ export function SiteFooter() {
           <p>© 2026 Helena Melo</p>
           <p className="max-w-xl">
             Acompanhamento holístico e complementar. Não substitui cuidados
-            médicos ou psicológicos. As fotografias desta página são
-            provisórias.
+            médicos ou psicológicos.
           </p>
         </div>
       </div>

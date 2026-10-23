@@ -3,8 +3,10 @@ import Link from "next/link";
 import { ContactActions } from "@/components/contact-actions";
 import { InstagramGrid } from "@/components/instagram-grid";
 import { JsonLd } from "@/components/json-ld";
+import { PartnershipSection } from "@/components/partnership-section";
+import { ServiceGroups } from "@/components/service-groups";
 import { assetPath, site } from "@/content/site";
-import { services } from "@/content/services";
+import { categories } from "@/content/services";
 import { practiceJsonLd } from "@/lib/structured-data";
 
 const steps = [
@@ -14,7 +16,7 @@ const steps = [
   },
   {
     title: "Combinamos o formato",
-    text: "Online ou presencial, conforme o que fizer sentido para ti.",
+    text: "Online, presencial ou no teu espaço, conforme o que fizer sentido.",
   },
   {
     title: "Chegas como estás",
@@ -41,8 +43,9 @@ export default function Home() {
               <span className="block">queres ser.</span>
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-pretty text-muted">
-              Acompanho-te em consultas de hipnoterapia, astrologia e tarot.
-              Online ou presencialmente.
+              Acompanho-te em terapias individuais, no movimento e em
+              experiências para hotéis, empresas e grupos. Online ou
+              presencialmente.
             </p>
             <ContactActions className="mt-8" />
           </div>
@@ -53,8 +56,8 @@ export default function Home() {
             />
             <div className="relative aspect-[3/4] overflow-hidden">
               <Image
-                src={assetPath("/images/forest-meditation.jpg")}
-                alt="Mulher em meditação sobre uma rocha, num pinhal com luz filtrada"
+                src={assetPath("/images/yoga-hero.jpeg")}
+                alt="Helena Melo em posição de yoga, num miradouro sobre um rio e colinas"
                 fill
                 priority
                 sizes="(min-width: 768px) 38vw, 100vw"
@@ -66,24 +69,28 @@ export default function Home() {
       </section>
 
       <section aria-label="Práticas" className="border-y border-line">
-        <ul className="mx-auto flex max-w-6xl flex-wrap gap-x-8 gap-y-3 px-5 py-5 text-sm tracking-[0.16em] text-teal uppercase lg:px-8">
-          {services.map((service) => (
-            <li key={service.slug}>
-              <Link href={`/servicos/${service.slug}`} className="hover:text-ink">
-                {service.title}
+        <ul className="mx-auto flex max-w-6xl flex-wrap gap-x-6 gap-y-3 px-5 py-5 text-sm tracking-[0.12em] text-teal uppercase lg:px-8">
+          {categories.map((category) => (
+            <li key={category.id} className="max-w-full">
+              <Link href={`/#${category.id}`} className="hover:text-ink">
+                {category.id === "experiencias"
+                  ? "Hotéis, empresas e grupos"
+                  : category.title}
               </Link>
             </li>
           ))}
         </ul>
       </section>
 
+      <PartnershipSection />
+
       <section id="sobre" className="scroll-mt-24">
         <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 py-16 md:grid-cols-12 md:py-24 lg:px-8">
           <div className="md:col-span-5">
             <div className="relative aspect-[3/4] overflow-hidden">
               <Image
-                src={assetPath("/images/morning-light.jpg")}
-                alt="Mulher em perfil, de manhã, junto a uma janela"
+                src={assetPath("/images/consultas-online.jpeg")}
+                alt="Helena Melo numa consulta online, com plantas e um caderno na secretária"
                 fill
                 sizes="(min-width: 768px) 36vw, 100vw"
                 className="object-cover"
@@ -104,8 +111,9 @@ export default function Home() {
                 que querem voltar a esse lugar com mais verdade.
               </p>
               <p>
-                Hipnoterapia, astrologia e tarot são linguagens diferentes
-                para a mesma intenção: recordar que podes ser quem queres ser.
+                Terapias, movimento e encontros de grupo são linguagens
+                diferentes para a mesma intenção: recordar que podes ser quem
+                queres ser.
               </p>
               <p>
                 As consultas acontecem online ou presencialmente. Não precisas
@@ -118,8 +126,8 @@ export default function Home() {
         <div className="mx-auto grid max-w-6xl gap-3 px-5 pb-16 md:grid-cols-2 md:pb-24 lg:px-8">
           <figure className="relative aspect-[4/3] overflow-hidden">
             <Image
-              src={assetPath("/images/beach-sit.jpg")}
-              alt="Mulher sentada na areia, de frente para o mar"
+              src={assetPath("/images/feira-alternativa-bem-estar-2024.jpeg")}
+              alt="Helena Melo junto à banca da Feira Alternativa de Bem-Estar, em 2024"
               fill
               sizes="(min-width: 768px) 48vw, 100vw"
               className="object-cover"
@@ -127,8 +135,8 @@ export default function Home() {
           </figure>
           <figure className="relative aspect-[4/3] overflow-hidden">
             <Image
-              src={assetPath("/images/yoga-hill.jpg")}
-              alt="Mulher em posição de yoga num monte, com um vale e um rio ao fundo"
+              src={assetPath("/images/yoga-para-criancas.jpeg")}
+              alt="Aula de yoga com crianças e adultos, em tapetes no jardim"
               fill
               sizes="(min-width: 768px) 48vw, 100vw"
               className="object-cover"
@@ -144,36 +152,14 @@ export default function Home() {
               Serviços
             </p>
             <h2 className="mt-3 font-serif text-5xl leading-[0.95] text-balance text-ink md:text-6xl">
-              Três caminhos, a mesma intenção.
+              Um caminho para cada momento.
             </h2>
             <p className="mt-5 text-lg leading-relaxed text-pretty text-muted">
-              Cada área tem a sua página, com o essencial da prática e as
-              perguntas que costumam chegar antes da primeira sessão.
+              Três formas de acompanhamento. Em cada prática encontras uma
+              apresentação, a descrição e um contacto direto.
             </p>
           </div>
-          <ol className="mt-10 border-b border-line">
-            {services.map((service, index) => (
-              <li key={service.slug}>
-                <Link
-                  href={`/servicos/${service.slug}`}
-                  className="group grid gap-3 border-t border-line py-7 md:grid-cols-12 md:items-baseline md:gap-6"
-                >
-                  <span className="font-script text-4xl leading-none text-lagoon md:col-span-2">
-                    0{index + 1}
-                  </span>
-                  <h3 className="font-serif text-4xl text-ink transition group-hover:text-teal md:col-span-4">
-                    {service.title}
-                  </h3>
-                  <p className="text-pretty text-muted md:col-span-5">
-                    {service.summary}
-                  </p>
-                  <span className="text-sm tracking-wide text-teal md:col-span-1 md:text-right">
-                    Ver
-                  </span>
-                </Link>
-              </li>
-            ))}
-          </ol>
+          <ServiceGroups />
         </div>
       </section>
 

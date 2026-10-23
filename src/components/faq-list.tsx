@@ -14,9 +14,11 @@ export function FaqList({ faqs }: { faqs: Faq[] }) {
               +
             </span>
           </summary>
-          <p className="max-w-2xl pt-3 text-base leading-relaxed text-pretty text-muted">
-            {faq.answer}
-          </p>
+          <div className="max-w-2xl space-y-3 pt-3 text-base leading-relaxed text-pretty text-muted">
+            {faq.answer.split("\n\n").map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+          </div>
         </details>
       ))}
     </div>

@@ -4,7 +4,7 @@ export const site = {
   name: "Helena Melo",
   role: "Terapeuta holística",
   description:
-    "Consultas online e presenciais de hipnoterapia, astrologia e tarot.",
+    "Terapias individuais, yoga, Tai Chi e experiências de bem-estar para hotéis, empresas e grupos. Online e presencialmente.",
   url: (process.env.NEXT_PUBLIC_SITE_URL ?? "https://helenamelo.pt").replace(
     /\/$/,
     "",
@@ -41,6 +41,7 @@ export function pageUrl(path: string) {
 export const nav = [
   { href: "/#sobre", label: "Sobre" },
   { href: "/#servicos", label: "Serviços" },
+  { href: "/#hoteis", label: "Hotéis e empresas" },
   { href: "/#instagram", label: "Instagram" },
   { href: "/#contacto", label: "Contacto" },
 ] as const;

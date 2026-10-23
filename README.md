@@ -1,34 +1,51 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Helena Melo
 
-## Getting Started
+Site da Helena Melo, terapeuta holística, em português de Portugal.
 
-First, run the development server:
+## Correr em local
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abrir [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+O repositório fica na tua máquina até o sincronizares com o GitHub.
 
-## Learn More
+## GitHub Pages
 
-To learn more about Next.js, take a look at the following resources:
+`npm run build` gera a pasta `out`. É essa pasta que o GitHub Pages publica. O site não precisa de um servidor Node.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Há um workflow em `.github/workflows/pages.yml`. Depois de criares o remoto e fazeres push para `main`:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. No repositório, abre Settings → Pages.
+2. Em Build and deployment, escolhe GitHub Actions.
 
-## Deploy on Vercel
+O endereço público assume a raiz do domínio (`https://helenamelo.pt` ou um site de utilizador `https://utilizador.github.io`). Se a página ficar num subendereço, como `https://utilizador.github.io/helena-melo`, define a variável de repositório `BASE_PATH` com o valor `/helena-melo` e volta a correr o workflow. Podes também definir `SITE_URL` com o endereço final.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Para ver o resultado antes de publicar, abre o endereço no browser. Não abras o `index.html` com dois cliques: os estilos começam em `/_next` e o browser procura-os na raiz do disco, por isso a página aparece sem formatação.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm run build
+npm run preview
+```
+
+Depois abre [http://localhost:4173](http://localhost:4173).
+
+## Antes de publicar
+
+- Troca as fotografias em `public/images`. São imagens temporárias e não são retratos da Helena.
+- Confirma o domínio em `src/content/site.ts` (`url`) ou define `NEXT_PUBLIC_SITE_URL`.
+- O botão de contacto abre as mensagens do Instagram: `https://ig.me/m/helenamelo.pt`.
+- O telefone é `+351 910 298 644`.
+
+## Páginas de serviço
+
+Cada serviço vive em `src/content/services.ts`, com texto, perguntas frequentes e imagem. A partir daí a página, os metadados, o sitemap e os dados estruturados são gerados em `/servicos/[slug]`.
+
+Para acrescentar uma área nova, adiciona um objeto a `services`. O endereço fica `/servicos/o-slug`.
+
+## Instagram
+
+A grelha da página inicial é uma seleção editorial em `src/content/instagram.ts`. Cada entrada pode passar a usar o endereço real da publicação (`href`) e uma fotografia (`image`). Ainda não há ligação automática à API do Instagram.
